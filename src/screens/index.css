@@ -1,0 +1,33 @@
+.navigation {
+    background-color: #ffffff;
+    padding: 2% 0%;
+    border-bottom: #b6b6b6 1px solid;
+    text-align: center;
+    font-family: "Times New Roman", serif;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.navigation-bar {
+    margin-top: 17px;
+}
+
+.navigation-bar-items {
+    
+}
+
+.center {
+    margin: auto;
+}
+
+.inline-float {
+    float: left;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.clear_float {
+    clear: both;
+}

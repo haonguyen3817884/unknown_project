@@ -4,12 +4,16 @@ import './index.css';
 import App from './App';
 import MainScreen from "./MainScreen";
 import reportWebVitals from './reportWebVitals';
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./reducers/index";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const store = createStore(rootReducer);
 root.render(
-  <React.StrictMode>
-    <MainScreen />
-  </React.StrictMode>
+  <Provider store={store}>
+      <MainScreen />
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

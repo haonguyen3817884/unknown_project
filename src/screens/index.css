@@ -3,17 +3,33 @@
     padding: 2% 0%;
     border-bottom: #b6b6b6 1px solid;
     text-align: center;
+}
+
+.navigation-brand {
     font-family: "Times New Roman", serif;
     font-size: 17px;
     font-weight: bold;
 }
 
 .navigation-bar {
-    margin-top: 17px;
+
 }
 
 .navigation-bar-items {
-    
+    font-family: "Times New Roman", serif;
+    padding: 17px 0px;
+    font-size: 17px;
+}
+
+.navigation-bar-items a {
+    text-decoration: none;
+    padding: 17px 17px;
+    color: #111111;
+}
+
+.navigation-bar-items a:hover {
+    color: #111111;
+    text-decoration: underline;
 }
 
 .center {
@@ -28,6 +44,244 @@
     display: inline-block;
 }
 
-.clear_float {
+.clear-float {
     clear: both;
+}
+
+.inline-float-50 {
+    float: left;
+    width: 50%;
+}
+
+.introduction-label {
+    text-align: center;
+    padding: 4% 5%;
+    font-size: 43px;
+    font-family: "Times New Roman", serif;
+    font-weight: bold;
+}
+
+.introduction-body {
+    background-color: none;
+    padding: 0% 10%;
+}
+
+.introduction-body-left {
+    width: 40%;
+}
+
+.introduction-body-right {
+    width: 50%;
+    padding: 17px 43px;
+}
+
+.introduction-body-left img {
+    max-width: 100%;
+    border-radius: 17px;
+}
+
+.introduction-body-right-label {
+    font-family: "Times New Roman", serif;
+    font-size: 43px;
+    font-weight: bold;
+}
+
+.introduction-body-right-detail {
+    font-family: "Times New Roman", serif;
+    color: #b6b6b6;
+    font-size: 17px;
+    font-weight: normal;
+    margin-top: 17px;
+}
+
+.introduction-body-right-avatar-card {
+    margin-top: 17px;
+}
+
+.most-popular-posts {
+    margin-top: 74px;
+}
+
+.most-popular-posts-label {
+    font-family: "Times New Roman", serif;
+    text-align: center;
+    font-size: 43px;
+    font-weight: bold;
+}
+
+.most-popular-posts-detail {
+    margin-top: 43px;
+}
+
+.booking {
+    margin-top: 74px;
+    padding: 5% 15%;
+    background-color: #b6b6b6;
+}
+
+.booking-label {
+    font-family: "Times New Roman", serif;
+    text-align: center;
+    font-size: 43px;
+    font-weight: bold;
+}
+
+.booking-button {
+    margin-top: 74px;
+    text-align: center;
+}
+
+.auth-label {
+    text-align: center;
+    padding: 4% 5%;
+    font-size: 43px;
+    font-family: "Times New Roman", serif;
+    font-weight: bold;
+}
+
+.auth-form-input {
+    text-align: center;
+    margin-top: 17px;
+}
+
+.auth-form-input input {
+    border: #b6b6b6 1px solid;
+    padding: 17px;
+    font-size: 17px;
+    width: 25%;
+    border-radius: 17px;   
+}
+
+.auth-form-button {
+    text-align: center;
+    margin-top: 74px;
+}
+
+.auth-form-button button {
+    background-color: yellow;
+    padding: 17px 43px;
+    font-size: 17px;
+    border: none;
+    border-radius: 43px;
+}
+
+.uploaded-blogs-table {
+    background-color: none;
+    padding: 0% 15%;
+}
+
+.uploaded-blogs-table-label {
+    font-family: "Times New Roman", serif;
+    font-size: 43px;
+    font-weight: bold;
+}
+
+.uploaded-blogs-table-detail {
+    margin-top: 43px;
+}
+
+.uploaded-blogs-table-button {
+    margin-top: 43px;
+    text-align: center;
+}
+
+.upload-form {
+
+}
+
+.upload-form-input {
+    text-align: center;
+    margin-top: 43px;
+}
+
+.upload-form-input input {
+    border: none;
+    padding: 0% 0%;
+    width: 50%;
+}
+
+.upload-form-input textarea {
+    border: none;
+    padding: 0% 0%;
+    width: 50%;
+}
+
+.upload-form-input-title {
+    font-family: "Times New Roman", serif;
+    font-size: 43px;
+    font-weight: bold;
+}
+
+.upload-form-input-detail {
+    font-family: "Times New Roman", serif;
+    font-size: 17px;
+    font-weight: normal;
+    height: 500px;
+}
+
+.upload-form-button {
+    text-align: center;
+    margin-top: 43px;
+}
+
+.blog-posts {
+    margin-top: 43px;
+}
+
+.blog-posts-label {
+    font-family: "Times New Roman", serif;
+    padding: 0% 5%;
+    font-size: 43px;
+    font-weight: bold;
+}
+
+.blog-posts-detail {
+    margin-top: 43px;
+}
+
+.blog-post {
+    margin-top: 43px;
+}
+
+.blog-post-data-fields {
+    text-align: center;
+    margin-top: 43px;
+}
+
+.blog-post-data-fields span {
+    border: none;
+    padding: 0% 0%;
+    width: 50%;
+}
+
+.blog-post-data-fields img {
+    width: 70%;
+    max-width: 100%;
+    border-radius: 17px;
+    height: 400px;
+}
+
+.blog-post-data-title {
+    font-family: "Times New Roman", serif;
+    font-size: 43px;
+    font-weight: bold;
+}
+
+.blog-post-data-detail {
+    font-family: "Times New Roman", serif;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.footer {
+    background-color: #ffffff;
+    padding: 5% 15%;
+}
+
+.footer-copyright {
+    font-family: "Times New Roman", serif;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: #b6b6b6;
 }

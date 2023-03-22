@@ -9,6 +9,7 @@ import isMovedFromScreen from "../../sharedActions/isMovedFromScreen";
 import getPage from "../../sharedActions/getPage";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "../../components/Button";
+import Logout from "../../components/logout/Logout";
 
 export default function CMSScreen() {
     const customer = useSelector(state => state.authReducer);
@@ -24,6 +25,10 @@ export default function CMSScreen() {
             <div className="introduction-label">{WELCOME + " " + customer.firstName + " " + customer.lastName}</div>
         </div>
 
+        <div className="logout">
+            <Logout />
+        </div>
+        
         <div className="uploaded-blogs-table">
             <div className="uploaded-blogs-table-label">{UPLOADED_BLOGS_TABLE_LABEL}</div>
             <div className="uploaded-blogs-table-detail">

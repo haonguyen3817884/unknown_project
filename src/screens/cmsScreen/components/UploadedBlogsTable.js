@@ -1,4 +1,6 @@
 import Blog from "../../../models/Blog";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function UploadedBlogsTable(props) {
     const cellWidth = 100/3;
@@ -43,8 +45,8 @@ export default function UploadedBlogsTable(props) {
                     <td style={tdStyle}>{blog._id}</td>
                     <td style={tdStyle}>{blog.blogTitle}</td>
                     <td style={tdStyle}>
-                        <i className="far fa-edit" onClick={() => {props.onEditButtonClicked(Blog.toJson(blog));}}></i>
-                        <i className="far fa-trash-alt" style={deleteIconStyle} onClick={async () => {await props.onDeleteButtonClicked(blog._id);}}></i>
+                        <FontAwesomeIcon icon={faEdit} onClick={() => {props.onEditButtonClicked(Blog.toJson(blog));}} />
+                        <FontAwesomeIcon icon={faTrash} style={deleteIconStyle} onClick={async () => {await props.onDeleteButtonClicked(blog._id);}} />
                     </td>
                 </tr>;
             })}

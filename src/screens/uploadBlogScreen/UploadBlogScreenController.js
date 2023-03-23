@@ -8,7 +8,7 @@ import Customer from "../../models/Customer";
 import Blog from "../../models/Blog";
 
 class UploadBlogScreenController extends BaseController {
-    constructor(titleInput, imageInput, detailInput, navigate, dispatch) {
+    constructor(titleInput, imageInput, detailInput, navigate, dispatch, setIsLoading) {
         super();
         this.titleInput = titleInput;
         this.imageInput = imageInput;
@@ -18,6 +18,7 @@ class UploadBlogScreenController extends BaseController {
         this.authApi = new AuthApi();
         this.dispatch = dispatch;
         this.customer = new Customer("", "", "");
+        this.setIsLoading = setIsLoading;
     }
 
     onTitleInputChanged(titleInput, callback) {
@@ -44,12 +45,16 @@ class UploadBlogScreenController extends BaseController {
     }
 
     async onButtonClicked() {
+        this.setIsLoading(true);
+        
         const blogImage = this.imageInput === "" ? require("../assets/post_lg_2.jpg") : this.imageInput;
         
         const blog = new Blog("", this.titleInput, blogImage, this.detailInput, this.customer.firstName + " " + this.customer.lastName, require("../assets/person_1.jpg"));
 
         const data = await this.blogApi.uploadBlog(blog, this.getToken());
 
+        this.setIsLoading(false);
+        
         if (data.message !== undefined) {
             console.log(data.message);
         } else {
@@ -58,9 +63,13 @@ class UploadBlogScreenController extends BaseController {
     }
 
     async setCustomerData() {
+        this.setIsLoading(true);
+        
         const data = await this.authApi.getCustomerData(this.getToken());
 
         if (data.message !== undefined) {
+            this.setIsLoading(false);
+            
             this.removeToken();
 
             this.navigate(LOGIN_ROUTE, {state: getPage(UPLOAD_BLOG_ROUTE)});
@@ -68,6 +77,7 @@ class UploadBlogScreenController extends BaseController {
             const customer = Customer.fromJson(data);
             this.customer = customer;
             this.dispatch(getCustomerData({customer: customer}));
+            this.setIsLoading(false);
         }
     }
 }

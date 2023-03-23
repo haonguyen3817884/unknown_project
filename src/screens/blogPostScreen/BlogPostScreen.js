@@ -3,11 +3,13 @@ import "../index.css";
 import { useParams } from "react-router-dom";
 import BlogPostScreenController from "./BlogPostScreenController";
 import Blog from "../../models/Blog";
+import Loading from "../../components/loading/Loading";
 
 export default function BlogPostScreen() {
     const {id} = useParams();
     const [blog, setBlog] = useState(new Blog("", "", require("../assets/post_lg_2.jpg"), "", "", require("../assets/person_1.jpg")));
-    const [controller, setController] = useState(new BlogPostScreenController(id, setBlog));
+    const [isLoading, setIsLoading] = useState(false);
+    const [controller, setController] = useState(new BlogPostScreenController(id, setBlog, setIsLoading));
 
     useEffect(() => {
         controller.onInit();
@@ -25,5 +27,7 @@ export default function BlogPostScreen() {
                 <span className="blog-post-data-detail">{blog.blogDetail}</span>
             </div>
         </div>
+
+        {isLoading ? <Loading /> : <></>}
     </div>;
 }

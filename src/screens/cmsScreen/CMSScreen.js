@@ -10,11 +10,13 @@ import getPage from "../../sharedActions/getPage";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "../../components/Button";
 import Logout from "../../components/logout/Logout";
+import Loading from "../../components/loading/Loading";
 
 export default function CMSScreen() {
     const customer = useSelector(state => state.authReducer);
     const blogs = useSelector(state => state.blogReducer);
-    const [controller, setController] = useState(new CMSScreenController(useNavigate(), useLocation(), useDispatch()));
+    const [isLoading, setIsLoading] = useState(false);
+    const [controller, setController] = useState(new CMSScreenController(useNavigate(), useLocation(), useDispatch(), setIsLoading));
     
     useEffect(() => {
         controller.onInit();
@@ -38,5 +40,7 @@ export default function CMSScreen() {
                 <Button name={NEW_BLOG} onClick={() => {controller.onButtonClicked();}} />
             </div>
         </div>
+
+        {isLoading ? <Loading /> : <></>}
     </div>;
 }

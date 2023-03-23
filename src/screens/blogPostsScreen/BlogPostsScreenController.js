@@ -6,11 +6,12 @@ import getPage from "../../sharedActions/getPage";
 import { BLOG_POSTS_ROUTE, BLOG_POST_ROUTE } from "../../config/constants";
 
 class BlogPostsScreenController extends BaseController {
-    constructor(dispatch, navigate) {
+    constructor(dispatch, navigate, setIsLoading) {
         super();
         this.blogApi = new BlogApi();
         this.dispatch = dispatch;
         this.navigate = navigate;
+        this.setIsLoading = setIsLoading;
     }
 
     async onInit() {
@@ -18,6 +19,8 @@ class BlogPostsScreenController extends BaseController {
     }
 
     async setUploadedBlogs() {
+        this.setIsLoading(true);
+        
         let data = await this.blogApi.getBlogs();
 
         let blogs = [];
@@ -27,6 +30,7 @@ class BlogPostsScreenController extends BaseController {
         }
 
         this.dispatch(getUploadedBlogs(blogs));
+        this.setIsLoading(false);
     }
 
     onBlogClicked(blogId) {

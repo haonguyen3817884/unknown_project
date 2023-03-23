@@ -37,9 +37,9 @@ class AuthScreenController extends BaseController {
         
         const data = await this.authApi.login(this.emailInput, this.passwordInput);
     
+        this.setIsLoading(false);
+        
         if (data.message === undefined) {
-            this.setIsLoading(false);
-            
             this.saveToken(data.token);
 
             let previousScreen = "";

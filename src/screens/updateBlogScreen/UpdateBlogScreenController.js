@@ -8,7 +8,7 @@ import Customer from "../../models/Customer";
 import Blog from "../../models/Blog";
 
 class UpdateBlogScreenController extends BaseController {
-    constructor(titleInput, imageInput, detailInput, navigate, dispatch, location, setTitleInput, setImageInput, setDetailInput) {
+    constructor(titleInput, imageInput, detailInput, navigate, dispatch, location, setTitleInput, setImageInput, setDetailInput, setIsLoading) {
         super();
         this.titleInput = titleInput;
         this.imageInput = imageInput;
@@ -23,6 +23,7 @@ class UpdateBlogScreenController extends BaseController {
         this.setImageInput = setImageInput;
         this.setDetailInput = setDetailInput;
         this._id = "";
+        this.setIsLoading = setIsLoading;
     }
 
     onTitleInputChanged(titleInput, callback) {
@@ -44,6 +45,8 @@ class UpdateBlogScreenController extends BaseController {
         if (this.isTokenSaved()) {
             await this.setCustomerData();
             
+            this.setIsLoading(true);
+            
             if (this.isBlogDataSent()) {
                 let blog = Blog.fromJson(this.getSentBlogData());
 
@@ -54,7 +57,9 @@ class UpdateBlogScreenController extends BaseController {
                 this.setTitleInput(blog.blogTitle);
                 this.setImageInput(blog.blogImage);
                 this.setDetailInput(blog.blogDetail);
+                this.setIsLoading(false);
             } else {
+                this.setIsLoading(false);
                 this.navigate(CMS_ROUTE, {state: getPage(UPDATE_BLOG_ROUTE)});
             }
         } else {
@@ -63,12 +68,16 @@ class UpdateBlogScreenController extends BaseController {
     }
 
     async onButtonClicked() {
+        this.setIsLoading(true);
+        
         const blogImage = this.imageInput === "" ? require("../assets/post_lg_2.jpg") : this.imageInput;
         
         const blog = new Blog(this._id, this.titleInput, blogImage, this.detailInput, this.customer.firstName + " " + this.customer.lastName, require("../assets/person_1.jpg"));
 
         const data = await this.blogApi.updateBlog(blog, this.getToken());
 
+        this.setIsLoading(false);
+        
         if (data.message !== undefined) {
             console.log(data.message);
         } else {
@@ -77,9 +86,13 @@ class UpdateBlogScreenController extends BaseController {
     }
 
     async setCustomerData() {
+        this.setIsLoading(true);
+        
         const data = await this.authApi.getCustomerData(this.getToken());
 
         if (data.message !== undefined) {
+            this.setIsLoading(false);
+            
             this.removeToken();
 
             this.navigate(LOGIN_ROUTE, {state: getPage(UPDATE_BLOG_ROUTE)});
@@ -87,6 +100,7 @@ class UpdateBlogScreenController extends BaseController {
             const customer = Customer.fromJson(data);
             this.customer = customer;
             this.dispatch(getCustomerData({customer: customer}));
+            this.setIsLoading(false);
         }
     }
 

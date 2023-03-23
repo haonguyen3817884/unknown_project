@@ -11,13 +11,14 @@ import Blog from "../../models/Blog";
 import { getUploadedBlogs, deleteBlog } from "../../actions/blogActions/actions";
 
 class CMSScreenController extends BaseController {
-    constructor(navigate, location, dispatch) {
+    constructor(navigate, location, dispatch, setIsLoading) {
         super();
         this.navigate = navigate;
         this.location = location;
         this.dispatch = dispatch;
         this.authApi = new AuthApi();
         this.blogApi = new BlogApi();
+        this.setIsLoading = setIsLoading;
     }
 
     async onInit() {
@@ -45,18 +46,25 @@ class CMSScreenController extends BaseController {
     }
 
     async setCustomerData() {
+        this.setIsLoading(true);
+        
         const data = await this.authApi.getCustomerData(this.getToken());
             
         if (data.message !== undefined) {
+            this.setIsLoading(false);
+            
             this.removeToken();
                 
             this.navigate(LOGIN_ROUTE, {state: getPage(CMS_ROUTE)});
         } else {
             this.dispatch(getCustomerData({customer: Customer.fromJson(data)}));
+            this.setIsLoading(false);
         }
     }
 
     async setUploadedBlogs() {
+        this.setIsLoading(true);
+        
         const data = await this.blogApi.getBlogs();
 
         let blogs = [];
@@ -66,12 +74,16 @@ class CMSScreenController extends BaseController {
         }
 
         this.dispatch(getUploadedBlogs(blogs));
+        this.setIsLoading(false);
     }
 
     async deleteUploadedBlog(blogId) {
+        this.setIsLoading(true);
+        
         const data = await this.blogApi.deleteBlog(blogId, this.getToken());
         
         this.dispatch(deleteBlog(blogId));
+        this.setIsLoading(false);
     }
 }
 

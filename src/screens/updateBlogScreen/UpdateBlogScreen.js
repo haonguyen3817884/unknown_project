@@ -6,13 +6,15 @@ import { useEffect, useState } from "react";
 import UpdateBlogScreenController from "./UpdateBlogScreenController";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Loading from "../../components/loading/Loading";
 
 export default function UpdateBlogScreen() {
     const [titleInput, setTitleInput] = useState("");
     const [imageInput, setImageInput] = useState("");
     const [detailInput, setDetailInput] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const customer = useSelector(state => state.authReducer);
-    const [controller, setController] = useState(new UpdateBlogScreenController(titleInput, imageInput, detailInput, useNavigate(), useDispatch(), useLocation(), setTitleInput, setImageInput, setDetailInput));
+    const [controller, setController] = useState(new UpdateBlogScreenController(titleInput, imageInput, detailInput, useNavigate(), useDispatch(), useLocation(), setTitleInput, setImageInput, setDetailInput, setIsLoading));
     
     useEffect(() => {
         controller.onInit();
@@ -37,5 +39,7 @@ export default function UpdateBlogScreen() {
                 <Button name={UPDATE} onClick={async () => {await controller.onButtonClicked();}} />
             </div>
         </div>
+
+        {isLoading ? <Loading /> : <></>}
     </div>;
 }

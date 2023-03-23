@@ -6,11 +6,13 @@ import { useEffect, useState } from "react";
 import AuthApi from "../../base/networking/services/AuthApi";
 import AuthScreenController from "./AuthScreenController";
 import { useNavigate, useLocation } from "react-router-dom";
+import Loading from "../../components/loading/Loading";
 
 export default function AuthScreen() {
     const [emailInput, setEmailInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
-    const [controller, setController] = useState(new AuthScreenController(emailInput, passwordInput, useNavigate(), useLocation()));
+    const [isLoading, setIsLoading] = useState(false);
+    const [controller, setController] = useState(new AuthScreenController(emailInput, passwordInput, useNavigate(), useLocation(), setIsLoading));
     
     useEffect(() => {
         controller.onInit();
@@ -25,5 +27,7 @@ export default function AuthScreen() {
                 <div className="auth-form-button"><button onClick={async () => {await controller.onButtonClicked();}}>{LOGIN}</button></div>
             </div>
         </div>
+
+        {isLoading ? <Loading /> : <></>}
     </div>;
 }

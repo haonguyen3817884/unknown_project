@@ -6,13 +6,15 @@ import { useEffect, useState } from "react";
 import UploadBlogScreenController from "./UploadBlogScreenController";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Loading from "../../components/loading/Loading";
 
 export default function UploadBlogScreen() {
     const [titleInput, setTitleInput] = useState("");
     const [imageInput, setImageInput] = useState("");
     const [detailInput, setDetailInput] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const customer = useSelector(state => state.authReducer);
-    const [controller, setController] = useState(new UploadBlogScreenController(titleInput, imageInput, detailInput, useNavigate(), useDispatch()));
+    const [controller, setController] = useState(new UploadBlogScreenController(titleInput, imageInput, detailInput, useNavigate(), useDispatch(), setIsLoading));
     
     useEffect(() => {
         controller.onInit();
@@ -37,5 +39,7 @@ export default function UploadBlogScreen() {
                 <Button name={UPLOAD} onClick={async () => {await controller.onButtonClicked();}} />
             </div>
         </div>
+
+        {isLoading ? <Loading /> : <></>}
     </div>;
 }

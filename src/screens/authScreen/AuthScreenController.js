@@ -6,13 +6,14 @@ import isMovedFromScreen from "../../sharedActions/isMovedFromScreen";
 import getPreviousScreen from "../../sharedActions/getPreviousScreen";
 
 class AuthScreenController extends BaseController {
-    constructor(emailInput, passwordInput, navigate, location) {
+    constructor(emailInput, passwordInput, navigate, location, setIsLoading) {
         super();
         this.authApi = new AuthApi();
         this.emailInput = emailInput;
         this.passwordInput = passwordInput;
         this.navigate = navigate;
         this.location = location;
+        this.setIsLoading = setIsLoading;
     }
 
     onInit() {
@@ -32,9 +33,13 @@ class AuthScreenController extends BaseController {
     }
 
     async onButtonClicked() {
+        this.setIsLoading(true);
+        
         const data = await this.authApi.login(this.emailInput, this.passwordInput);
     
         if (data.message === undefined) {
+            this.setIsLoading(false);
+            
             this.saveToken(data.token);
 
             let previousScreen = "";

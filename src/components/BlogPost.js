@@ -5,7 +5,9 @@ export default function BlogPost(props) {
 
     let imageStyle = {
         borderRadius: "17px",
-        maxWidth: "100%"
+        maxWidth: "100%",
+        width: "100%",
+        height: "250px"
     };
 
     let blogTitleStyle = {
